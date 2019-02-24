@@ -1,46 +1,63 @@
+class Queue {
+    constructor() {
+        this.q = [];
+        this.isRunning = false;
+    }
+
+    push(element) {
+        this.q.push(element);
+    }
+
+    pushSpread(...elements) {
+        this.q.push(...elements);
+    }
+
+    shift() {
+        return this.q.shift();
+    }
+
+    getLength() {
+        return this.q.length;
+    }
+}
+
 class TypeWriter {
     constructor(target) {
         this.el = document.querySelector(target);
         this.speed = 100; // ms
-        this.q = [];
-        this.isQRunning = false;
+        this.charQ = new Queue();
+        this.methodQ = new Queue();
     }
 
-    runQ() {
-        if (!this.isQRunning && this.q.length) {
-            console.log('running q');
-            this.isQRunning = true;
+    runCharQ() {
+        if (!this.charQ.isRunning && this.charQ.getLength()) {
+            this.charQ.isRunning = true;
+            console.log('starting charQ');
 
             const intervalId = setInterval(() => {
-                this.el.innerHTML += this.q.shift();
-                console.log(this.q);
+                console.log(this.charQ.q);
+                this.el.innerHTML += this.charQ.shift();
 
-                if (!this.q.length) {
-                    console.log('nothing left in q. stopping q. clearing interval.');
+                if (!this.charQ.getLength()) {
+                    this.charQ.isRunning = false;
                     clearInterval(intervalId);
-                    this.isQRunning = false;
+                    console.log('emptied charQ. clearing interval');
                 }
-
             }, this.speed);
         }
         else {
-            console.log('either q is running or nothing in it. not running it again.');
+            console.log('charQ already running or empty');
         }
     }
 
-    write(string) {
-        const characters = string.split('');
-
-        // if q is running
-            // wait until it is not running to
-            // push new elements into the q
-            // so new options can be passed in (such as speed)
-
-        for (let index = 0; index < characters.length; index++) {
-            this.q.push(characters[index]);
-        }
-
-        this.runQ();
+    write(string, options = null) {
+        // if (!this.charQ.isRunning) {
+            this.charQ.pushSpread(...string);
+            this.runCharQ();
+        // }
+        // else {
+            // push something into methodQ?
+        // }
 
         return this;
     }
