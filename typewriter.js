@@ -58,9 +58,15 @@ class TypeWriter {
         return this;
     }
 
-    wait() {
-        this.methodQ.push('wait');
-        console.log(this.methodQ);
+    wait(milliseconds) {
+        this.methodQ.push(() => {
+            setTimeout(() => {
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            }, milliseconds);
+        });
+
+        this.runNextMethod();
         return this;
 
     }
