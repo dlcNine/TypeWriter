@@ -78,8 +78,13 @@ class TypeWriter {
     }
 
     clear() {
-        this.methodQ.push('clear');
-        console.log(this.methodQ);
+        this.methodQ.push(() => {
+            this.el.innerHTML = '';
+            this.methodQ.isRunning = false;
+            this.runNextMethod();
+        });
+
+        this.runNextMethod();
         return this;
     }
 }
