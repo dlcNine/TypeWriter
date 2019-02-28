@@ -68,12 +68,16 @@ class TypeWriter {
 
         this.runNextMethod();
         return this;
-
     }
 
     newLine() {
-        this.methodQ.push('newLine');
-        console.log(this.methodQ);
+        this.methodQ.push(() => {
+            this.el.innerHTML += '<br/>';
+            this.methodQ.isRunning = false;
+            this.runNextMethod();
+        });
+
+        this.runNextMethod();
         return this;
     }
 
