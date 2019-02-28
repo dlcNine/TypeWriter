@@ -58,6 +58,16 @@ class TypeWriter {
         return this;
     }
 
+    writeNow(string, options) {
+        this.methodQ.push(() => {
+            this.charQ.push(string);
+            this.runCharQ(options);
+        });
+
+        this.runNextMethod();
+        return this;
+    }
+
     wait(milliseconds) {
         this.methodQ.push(() => {
             setTimeout(() => {
