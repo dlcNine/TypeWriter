@@ -1,7 +1,6 @@
 class Queue {
     constructor() {
         this.q = [];
-        this.isRunning = false;
     }
 
     push(element) {
@@ -29,36 +28,52 @@ class TypeWriter {
         this.methodQ = new Queue();
     }
 
-    runCharQ() {
-        if (!this.charQ.isRunning && this.charQ.getLength()) {
-            this.charQ.isRunning = true;
-            console.log('starting charQ');
+    runCharQ(options = {}) {
+        const intervalId = setInterval(() => {
+            this.el.innerHTML += this.charQ.shift();
 
-            const intervalId = setInterval(() => {
-                console.log(this.charQ.q);
-                this.el.innerHTML += this.charQ.shift();
+            if (!this.charQ.getLength()) {
+                clearInterval(intervalId);
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            }
 
-                if (!this.charQ.getLength()) {
-                    this.charQ.isRunning = false;
-                    clearInterval(intervalId);
-                    console.log('emptied charQ. clearing interval');
-                }
-            }, this.speed);
-        }
-        else {
-            console.log('charQ already running or empty');
+        }, options.speed || this.speed);
+    }
+
+    runNextMethod() {
+        if (!this.methodQ.isRunning && this.methodQ.getLength()) {
+            this.methodQ.isRunning = true;
+            this.methodQ.shift()();
         }
     }
 
-    write(string, options = null) {
-        // if (!this.charQ.isRunning) {
+    write(string, options) {
+        this.methodQ.push(() => {
             this.charQ.pushSpread(...string);
-            this.runCharQ();
-        // }
-        // else {
-            // push something into methodQ?
-        // }
+            this.runCharQ(options);
+        });
+  
+        this.runNextMethod();
+        return this;
+    }
 
+    wait() {
+        this.methodQ.push('wait');
+        console.log(this.methodQ);
+        return this;
+
+    }
+
+    newLine() {
+        this.methodQ.push('newLine');
+        console.log(this.methodQ);
+        return this;
+    }
+
+    clear() {
+        this.methodQ.push('clear');
+        console.log(this.methodQ);
         return this;
     }
 }
