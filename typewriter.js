@@ -1,6 +1,7 @@
 class Queue {
     constructor() {
         this.q = [];
+        this.isRunning = false;
     }
 
     push(element) {
@@ -48,9 +49,9 @@ class TypeWriter {
         }
     }
 
-    write(string, options) {
+    write(text, options) {
         this.methodQ.push(() => {
-            this.charQ.pushSpread(...string);
+            this.charQ.pushSpread(...String(text));
             this.runCharQ(options);
         });
   
@@ -58,9 +59,26 @@ class TypeWriter {
         return this;
     }
 
-    writeNow(string, options) {
+    writeWords(text, options) {
+        const words = String(text).split(' ').map((current, index, array) => {
+            if (index === array.length - 1)
+                return current;
+            else
+                return current + ' ';
+        });
+
         this.methodQ.push(() => {
-            this.charQ.push(string);
+            this.charQ.pushSpread(...words);
+            this.runCharQ(options);
+        });
+
+        this.runNextMethod();
+        return this;
+    }
+
+    writeAll(text, options) {
+        this.methodQ.push(() => {
+            this.charQ.push(String(text));
             this.runCharQ(options);
         });
 
