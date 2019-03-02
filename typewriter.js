@@ -30,8 +30,18 @@ class TypeWriter {
     }
 
     runCharQ(options = {}) {
+        let span;
+
+        if (options.class) {
+            this.el.innerHTML += `<span class="${options.class}"></span>`;
+            span = this.el.children[this.el.children.length - 1];
+        }
+
         const intervalId = setInterval(() => {
-            this.el.innerHTML += this.charQ.shift();
+            if (options.class)
+                span.innerHTML += this.charQ.shift();
+            else
+                this.el.innerHTML += this.charQ.shift();
 
             if (!this.charQ.getLength()) {
                 clearInterval(intervalId);
@@ -64,7 +74,7 @@ class TypeWriter {
             if (index === array.length - 1)
                 return current;
             else
-                return current + ' ';
+                return `${current} `;
         });
 
         this.methodQ.push(() => {
