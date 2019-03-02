@@ -23,7 +23,7 @@ tw.write('the quick brown fox').newLine()
 .writeAll(text, options) // string, object
     - Renders the entire string at once to the specified target.
 
-    - The options object may look like the following:
+    - The optional options object may look like the following:
 
         {
             speed: 200,    // number (milliseconds)
@@ -40,6 +40,9 @@ tw.write('the quick brown fox').newLine()
 
 .eraseAll()
     - Removes all content from the specified target.
+
+.callBack(cb, args) // function, array
+    - Pass in your own function definition to be executed. args is an optional array of arguments which will be spread and passed to your passed in function.
 ```
 Note that this may change, as it is under development.
 
