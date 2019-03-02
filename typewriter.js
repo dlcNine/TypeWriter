@@ -132,6 +132,21 @@ const TypeWriter = (function() {
             this.runNextMethod();
             return this;
         }
+
+        callBack(cb, args) {
+            this.methodQ.push(() => {
+                if (args)
+                    cb(...args);
+                else
+                    cb();
+
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            });
+
+            this.runNextMethod();
+            return this;
+        }
     }
 
     return TypeWriter;
