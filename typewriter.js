@@ -147,6 +147,17 @@ const TypeWriter = (function() {
             this.runNextMethod();
             return this;
         }
+
+        setSpeed(speed) {
+            this.methodQ.push(() => {
+                this.speed = speed;
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            });
+
+            this.runNextMethod();
+            return this;
+        }
     }
 
     return TypeWriter;

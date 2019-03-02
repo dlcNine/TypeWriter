@@ -43,6 +43,9 @@ tw.write('the quick brown fox').newLine()
 
 .callBack(cb, args) // function, array
     - Pass in your own function definition to be executed. args is an optional array of arguments which will be spread and passed to your passed in function.
+
+.setSpeed(speed) // number
+    - Set the default speed (milliseconds).
 ```
 Note that this may change, as it is under development.
 
