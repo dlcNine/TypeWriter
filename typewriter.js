@@ -27,7 +27,7 @@ const TypeWriter = (function() {
             this.el = document.querySelector(target);
             this.speed = 100; // ms
             this.charQ = new Queue();
-            this.charInterval = undefined;
+            this.intervalId = undefined;
             this.methodQ = new Queue();
         }
 
@@ -39,15 +39,15 @@ const TypeWriter = (function() {
                 span = this.el.children[this.el.children.length - 1];
             }
 
-            this.charInterval = setInterval(() => {
+            this.intervalId = setInterval(() => {
                 if (options.class)
                     span.innerHTML += this.charQ.shift();
                 else
                     this.el.innerHTML += this.charQ.shift();
 
                 if (!this.charQ.getLength()) {
-                    clearInterval(this.charInterval);
-                    this.charInterval = undefined;
+                    clearInterval(this.intervalId);
+                    this.intervalId = undefined;
                     this.methodQ.isRunning = false;
                     this.runNextMethod();
                 }
@@ -116,6 +116,32 @@ const TypeWriter = (function() {
                 this.el.innerHTML += '<br/>';
                 this.methodQ.isRunning = false;
                 this.runNextMethod();
+            });
+
+            this.runNextMethod();
+            return this;
+        }
+
+        erase(amount, speed = this.speed) {
+            this.methodQ.push(() => {
+                this.intervalId = setInterval(() => {
+                    if (this.el.lastChild && amount) {
+                        if (!this.el.lastChild.textContent.length) {
+                            this.el.lastChild.remove();
+                        }
+
+                        if (this.el.lastChild && this.el.lastChild.textContent.length) {
+                            this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
+                            amount--;
+                        }
+                    }
+                    else {
+                        clearInterval(this.intervalId);
+                        this.intervalId = undefined;
+                        this.methodQ.isRunning = false;
+                        this.runNextMethod();
+                    }
+                }, speed || this.speed);
             });
 
             this.runNextMethod();

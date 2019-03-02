@@ -36,7 +36,7 @@
             document.querySelector('body').style.backgroundColor = 'black';
         }
 
-        tw.write('the quick brown').writeWords(' fox jumps over ', {speed: 300, class: 'timid spacey'}).newLine().newLine().setSpeed(25).writeAll('the lazy dog').wait(2000).eraseAll().write('i\'m going to set the background color now').wait(500).callBack(bgColor, ['lightblue', 'this is another argument']).write(' wasn\'t that cool?', {speed: 300}).writeWords(' okay, i\'ll change it back', {speed: 200}).wait(500).callBack(resetBGColor);
+        tw.write('thequickbrown').write('foxjumpsover', {class: 'timid'}).write('thelazydog').erase(32).write(' wasn\'t that cool?');
 
     </script>
 </body>
