@@ -38,7 +38,8 @@ tw.write('the quick brown fox').newLine()
 .newLine()
     - Starts a new line.
 
-.clear()
+.eraseAll()
     - Removes all content from the specified target.
 ```
+Note that this may change, as it is under development.
 

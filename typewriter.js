@@ -27,6 +27,7 @@ const TypeWriter = (function() {
             this.el = document.querySelector(target);
             this.speed = 100; // ms
             this.charQ = new Queue();
+            this.charInterval = undefined;
             this.methodQ = new Queue();
         }
 
@@ -38,14 +39,15 @@ const TypeWriter = (function() {
                 span = this.el.children[this.el.children.length - 1];
             }
 
-            const intervalId = setInterval(() => {
+            this.charInterval = setInterval(() => {
                 if (options.class)
                     span.innerHTML += this.charQ.shift();
                 else
                     this.el.innerHTML += this.charQ.shift();
 
                 if (!this.charQ.getLength()) {
-                    clearInterval(intervalId);
+                    clearInterval(this.charInterval);
+                    this.charInterval = undefined;
                     this.methodQ.isRunning = false;
                     this.runNextMethod();
                 }
@@ -120,7 +122,7 @@ const TypeWriter = (function() {
             return this;
         }
 
-        clear() {
+        eraseAll() {
             this.methodQ.push(() => {
                 this.el.innerHTML = '';
                 this.methodQ.isRunning = false;
