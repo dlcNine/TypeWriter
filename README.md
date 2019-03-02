@@ -2,8 +2,7 @@
 Small js library to expressively render text. This project is currently under development.
 
 ## Goal
-Create a class with a simple and chainable API which renders text to the specified target. I'm aiming to make it work like this:
-
+Create a class with a simple and chainable API which renders text to the specified target.
 ```
 const tw = new TypeWriter('#target');
 
@@ -14,18 +13,32 @@ tw.write('the quick brown fox').newLine()
 ```
 
 ## API
-The methods I have in mind are:
-
 ```
-.write(string)
-    // renders the string one character at a time to the specified target
-.wait(milliseconds)
-    // wait n amount of milliseconds before executing the next method
+.write(text, options) // string, object
+    - Render the text one character at a time to the specified target.
+
+.writeWords(text, options) // string, object
+    - Render the text word by word to the specified target. Internally, words are split by a single space, ' '.
+
+.writeAll(text, options) // string, object
+    - Renders the entire string at once to the specified target.
+
+    - The options object may look like the following:
+
+        {
+            speed: 200,    // number (milliseconds)
+            class: 'angry' // string
+        }
+
+        - To include more than one class, just separate each sequential class name with a space
+
+.wait(milliseconds) // number
+    - Waits n milliseconds before executing the next method.
+
 .newLine()
-    // start a new line
-.clear()
-    // remove all the content from the specified target
-```
+    - Starts a new line.
 
-Note that this may change, as it is under development.
+.clear()
+    - Removes all content from the specified target.
+```
 
