@@ -25,7 +25,8 @@
     <script src="./typewriter.js" type="text/javascript"></script>
     <script type="text/javascript">
         const tw = new TypeWriter('#target');
-        tw.write('the quick brown fox jumps over the lazy dog.').writeWords('the quick brown fox jumps over the lazy dog', {speed: 500}).wait(1000).writeAll(' the quick brown fox jumps over the lazy dog');
+        tw.write('the quick brown fox jumps over the lazy dog.', {class: 'timid spacey'}).writeWords('the quick brown fox jumps over the lazy dog', {speed: 500, class: 'angry spacey'}).wait(1000).writeAll(' the quick brown fox jumps over the lazy dog');
+
     </script>
 </body>
 </html>
