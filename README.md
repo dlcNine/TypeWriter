@@ -38,6 +38,9 @@ tw.write('the quick brown fox').newLine()
 .newLine()
     - Starts a new line.
 
+.erase(amount, speed) // number, number
+    - Removes the specified amount of characters from the target element. The optional speed argument defaults to the typewriter speed.
+
 .eraseAll()
     - Removes all content from the specified target.
 
