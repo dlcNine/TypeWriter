@@ -117,7 +117,7 @@ const TypeWriter = (function() {
                 setTimeout(() => {
                     this.methodQ.isRunning = false;
                     this.runNextMethod();
-                }, milliseconds);
+                }, Math.floor(Math.abs(milliseconds)));
             });
 
             this.runNextMethod();
@@ -137,6 +137,8 @@ const TypeWriter = (function() {
 
         erase(amount, options = {}) {
             this.methodQ.push(() => {
+                amount = Math.floor(Math.abs(amount));
+
                 if (options.spaces === undefined)
                     options.spaces = true;
 
@@ -199,7 +201,7 @@ const TypeWriter = (function() {
 
         setSpeed(speed) {
             this.methodQ.push(() => {
-                this.speed = speed;
+                this.speed = Math.floor(Math.abs(speed));
                 this.methodQ.isRunning = false;
                 this.runNextMethod();
             });
