@@ -135,17 +135,27 @@ const TypeWriter = (function() {
             return this;
         }
 
-        erase(amount, speed = this.speed) {
+        erase(amount, options = {}) {
             this.methodQ.push(() => {
+                if (options.spaces === undefined)
+                    options.spaces = true;
+
                 this.intervalId = setInterval(() => {
                     if (this.el.lastChild && amount) {
                         if (!this.el.lastChild.textContent.length) {
                             this.el.lastChild.remove();
                         }
 
-                        if (this.el.lastChild && this.el.lastChild.textContent.length) {
-                            this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
-                            amount--;
+                        if (this.el.lastChild) {
+                            if (this.el.lastChild.textContent.length) {
+                                this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
+                                amount--;
+                            }
+
+                            if (options.spaces && amount && this.el.lastChild.textContent.length && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
+                                this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
+                                amount--;
+                            }
                         }
                     }
                     else {
@@ -154,7 +164,7 @@ const TypeWriter = (function() {
                         this.methodQ.isRunning = false;
                         this.runNextMethod();
                     }
-                }, speed || this.speed);
+                }, options.speed || this.speed);
             });
 
             this.runNextMethod();

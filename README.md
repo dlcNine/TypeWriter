@@ -30,6 +30,8 @@ tw.write('the quick brown fox').newLine()
             class: 'angry' // string
         }
 
+        - speed defaults to typewriter speed
+
         - To include more than one class, just separate each sequential class name with a space
 
 .wait(milliseconds) // number
@@ -38,8 +40,19 @@ tw.write('the quick brown fox').newLine()
 .newLine()
     - Starts a new line.
 
-.erase(amount, speed) // number, number
+.erase(amount, options) // number, object
     - Removes the specified amount of characters from the target element. The optional speed argument defaults to the typewriter speed.
+
+        - The optional options object may look like the following:
+
+            {
+                speed: 200, // number (milliseconds)
+                spaces: false // boolean
+            }
+
+            - speed defaults to the typewriter speed
+
+            - spaces defaults to true, therefore erase will erase the next character if it's a space on the same interval that it erases a non space character. If you do not want spaces to be erased on the same interval that a character is erased, set the spaces property to false.
 
 .eraseAll()
     - Removes all content from the specified target.
