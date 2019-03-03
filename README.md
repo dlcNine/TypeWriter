@@ -54,6 +54,9 @@ tw.write('the quick brown fox').newLine()
 
             - spaces defaults to true, therefore erase will erase the next character if it's a space on the same interval that it erases a non space character. If you do not want spaces to be erased on the same interval that a character is erased, set the spaces property to false.
 
+.eraseWords(amount, speed) // number, number
+    - Removes the specified amount of word from the target element. The optional speed argument defaults to the typewriter speed. When a word is removed, any single spaces wrapping that word are removed as well.
+
 .eraseAll()
     - Removes all content from the specified target.
 

@@ -36,7 +36,12 @@
             document.querySelector('body').style.backgroundColor = 'black';
         }
 
-        tw.write('the quick brown fox jumps over the lazy dog').writeWords('the quick brown fox jumps over the lazy dog').writeAll('the quick brown fox jumps over the lazy dog').wait(500).eraseAll().wait(500).write('the quick brown fox jumps over the lazy dog ', {class: 'timid'}).writeWords('the quick brown fox jumps over the lazy dog').writeAll('the quick brown fox jumps over the lazy dog', { class: 'timid'}).erase(50);
+        tw
+        .write('the quick brown fox jumps over the lazy dog ', {class: 'timid'})
+        .writeWords('the quick brown fox jumps over the lazy dog')
+        .writeAll(' the quick brown fox jumps over the lazy dog', { class: 'timid'})
+        .wait(1000)
+        .eraseWords(10).write(' lazy dog');
 
     </script>
 </body>
