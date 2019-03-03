@@ -17,6 +17,10 @@ const TypeWriter = (function() {
             return this.q.shift();
         }
 
+        peek() {
+            return this.q[0];
+        }
+
         getLength() {
             return this.q.length;
         }
@@ -32,18 +36,21 @@ const TypeWriter = (function() {
         }
 
         runCharQ(options = {}) {
-            let span;
+            let target;
 
             if (options.class) {
                 this.el.innerHTML += `<span class="${options.class}"></span>`;
-                span = this.el.children[this.el.children.length - 1];
+                target = this.el.lastElementChild;
+            }
+            else {
+                target = this.el;
             }
 
             this.intervalId = setInterval(() => {
-                if (options.class)
-                    span.innerHTML += this.charQ.shift();
-                else
-                    this.el.innerHTML += this.charQ.shift();
+                target.innerHTML += this.charQ.shift();
+
+                if (this.charQ.peek() === ' ')
+                    target.innerHTML += this.charQ.shift();
 
                 if (!this.charQ.getLength()) {
                     clearInterval(this.intervalId);
