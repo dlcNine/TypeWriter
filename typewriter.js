@@ -38,6 +38,9 @@ const TypeWriter = (function() {
         runCharQ(options = {}) {
             let target;
 
+            if (options.speed)
+                options.speed = Math.floor(Math.abs(options.speed));
+
             if (options.class) {
                 this.el.innerHTML += `<span class="${options.class}"></span>`;
                 target = this.el.lastElementChild;
@@ -142,6 +145,9 @@ const TypeWriter = (function() {
                 if (options.spaces === undefined)
                     options.spaces = true;
 
+                if (options.speed)
+                    options.speed = Math.floor(Math.abs(options.speed));
+
                 this.intervalId = setInterval(() => {
                     if (this.el.lastChild && amount) {
                         if (!this.el.lastChild.textContent.length) {
@@ -167,6 +173,45 @@ const TypeWriter = (function() {
                         this.runNextMethod();
                     }
                 }, options.speed || this.speed);
+            });
+
+            this.runNextMethod();
+            return this;
+        }
+
+        eraseWords(amount, speed) {
+            this.methodQ.push(() => {
+                amount = Math.floor(Math.abs(amount));
+                speed = Math.floor(Math.abs(speed));
+
+                this.intervalId = setInterval(() => {
+                    if (this.el.lastChild && amount) {
+                        if (this.el.lastChild.textContent && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
+                            this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
+                        }
+
+                        const words = this.el.lastChild.textContent.split(' ');
+                        const lastWord = words[words.length - 1];
+
+                        this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -lastWord.length);
+
+                        if (this.el.lastChild.textContent && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
+                            this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
+                        }
+
+                        if (!this.el.lastChild.textContent) {
+                            this.el.lastChild.remove();
+                        }
+
+                        amount--;
+                    }
+                    else {
+                        clearInterval(this.intervalId);
+                        this.intervalId = undefined;
+                        this.methodQ.isRunning = false;
+                        this.runNextMethod();
+                    }
+                }, speed || this.speed);
             });
 
             this.runNextMethod();
