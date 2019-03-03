@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Expressively render text using the TypeWriter js libary.">
+    <title>TypeWriter - dlcnine</title>
+    <link rel="stylesheet" href="./style.css" type="text/css">
+</head>
+<body>
+    <div class="grid">
+        <div class="unit-half">
+            <div class="rpg-box">
+                <p>Normal</p>
+                <p>Link... Wake up Link. Can Hyrule's destiny really depend on such a lazy boy?</p>
+            </div>
+        </div>
+        <div class="unit-half">
+            <div class="rpg-box">
+                <p>TypeWriter</p>
+                <p id="target"></p>
+            </div>
+        </div>
+    </div>
+    <script src="./typewriter.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        const tw = new TypeWriter('#target');
+
+        function bgColor(color, text) {
+            document.querySelector('body').style.backgroundColor = color;
+
+            console.log(text);
+        }
+
+        function resetBGColor() {
+            document.querySelector('body').style.backgroundColor = 'black';
+        }
+
+        tw
+        .write('the quick brown fox jumps over the lazy dog ', {class: 'timid'})
+        .writeWords('the quick brown fox jumps over the lazy dog')
+        .writeAll(' the quick brown fox jumps over the lazy dog', { class: 'timid'})
+        .wait(1000)
+        .eraseWords(10).write(' lazy dog');
+
+    </script>
+</body>
+</html>
