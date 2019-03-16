@@ -1,27 +1,24 @@
 # TypeWriter
-Small js library to expressively render text. This project is currently under development.
+Small js library to expressively render text.
 
-## Goal
-Create a class with a simple and chainable API which renders text to the specified target.
+## Usage
 ```
 const tw = new TypeWriter('#target');
 
-tw.write('the quick brown fox').newLine()
-    .write('jumps over the').wait(2000).write('lazy dog.').newLine()
-    .clear()
-    .write('the quick brown fox jumps...');
+tw.write('the quick brown ').newLine()
+.writeWords('fox jumps over', { class: 'angry'}).writeAll(' the lazy dog').wait(3000).eraseAll();
 ```
 
 ## API
 ```
 .write(text, options) // string, object
-    - Render the text one character at a time to the specified target.
+    - Render the text one character at a time to the specified target. The options object is optional.
 
 .writeWords(text, options) // string, object
-    - Render the text word by word to the specified target. Internally, words are split by a single space, ' '.
+    - Render the text word by word to the specified target. Internally, words are split by a single space, ' '. The options object is optional.
 
 .writeAll(text, options) // string, object
-    - Renders the entire string at once to the specified target.
+    - Renders the entire string at once to the specified target. The options object is optional.
 
     - The optional options object may look like the following:
 
@@ -34,31 +31,20 @@ tw.write('the quick brown fox').newLine()
 
         - To include more than one class, just separate each sequential class name with a space
 
+.erase(amount, speed) // number, number
+    - Removes the specified amount of characters from the target element. The optional speed argument defaults to the typewriter speed.
+
+.eraseWords(amount, speed) // number, number
+    - Removes the specified amount of words from the target element. The optional speed argument defaults to the typewriter speed. Before and after each word is removed, the end is trimmed.
+
+.eraseAll()
+    - Removes all content from the specified target.
+
 .wait(milliseconds) // number
     - Waits n milliseconds before executing the next method.
 
 .newLine()
     - Starts a new line.
-
-.erase(amount, options) // number, object
-    - Removes the specified amount of characters from the target element. The optional speed argument defaults to the typewriter speed.
-
-        - The optional options object may look like the following:
-
-            {
-                speed: 200, // number (milliseconds)
-                spaces: false // boolean
-            }
-
-            - speed defaults to the typewriter speed
-
-            - spaces defaults to true, therefore erase will erase the next character if it's a space on the same interval that it erases a non space character. If you do not want spaces to be erased on the same interval that a character is erased, set the spaces property to false.
-
-.eraseWords(amount, speed) // number, number
-    - Removes the specified amount of word from the target element. The optional speed argument defaults to the typewriter speed. When a word is removed, any single spaces wrapping that word are removed as well.
-
-.eraseAll()
-    - Removes all content from the specified target.
 
 .callBack(cb, args) // function, array
     - Pass in your own function definition to be executed. args is an optional array of arguments which will be spread and passed to your passed in function.
@@ -66,5 +52,4 @@ tw.write('the quick brown fox').newLine()
 .setSpeed(speed) // number
     - Set the default speed (milliseconds).
 ```
-Note that this may change, as it is under development.
 
