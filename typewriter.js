@@ -29,7 +29,7 @@ const TypeWriter = (function() {
     class TypeWriter {
         constructor(target) {
             this.el = document.querySelector(target);
-            this.speed = 250; // ms
+            this.speed = 50; // ms
             this.charQ = new Queue();
             this.intervalId = undefined;
             this.methodQ = new Queue();
@@ -104,40 +104,19 @@ const TypeWriter = (function() {
             return this;
         }
 
-        // writeAll(text, options) {
-        //     if (String(text)) {
-        //         this.methodQ.push(() => {
-        //             this.charQ.push(String(text));
-        //             this.runCharQ(options);
-        //         });
-        //     }
+        writeAll(text, options) {
+            if (String(text)) {
+                this.methodQ.push(() => {
+                    this.charQ.push(String(text));
+                    this.runCharQ(options);
+                });
+            }
 
-        //     this.runNextMethod();
-        //     return this;
-        // }
+            this.runNextMethod();
+            return this;
+        }
 
-        // wait(milliseconds) {
-        //     this.methodQ.push(() => {
-        //         setTimeout(() => {
-        //             this.methodQ.isRunning = false;
-        //             this.runNextMethod();
-        //         }, Math.floor(Math.abs(milliseconds)));
-        //     });
-
-        //     this.runNextMethod();
-        //     return this;
-        // }
-
-        // newLine() {
-        //     this.methodQ.push(() => {
-        //         this.el.innerHTML += '<br/>';
-        //         this.methodQ.isRunning = false;
-        //         this.runNextMethod();
-        //     });
-
-        //     this.runNextMethod();
-        //     return this;
-        // }
+        
 
         // erase(amount, options = {}) {
         //     this.methodQ.push(() => {
@@ -230,31 +209,54 @@ const TypeWriter = (function() {
         //     return this;
         // }
 
-        // callBack(cb, args) {
-        //     this.methodQ.push(() => {
-        //         if (args)
-        //             cb(...args);
-        //         else
-        //             cb();
+        wait(milliseconds) {
+            this.methodQ.push(() => {
+                setTimeout(() => {
+                    this.methodQ.isRunning = false;
+                    this.runNextMethod();
+                }, Math.floor(Math.abs(milliseconds)));
+            });
 
-        //         this.methodQ.isRunning = false;
-        //         this.runNextMethod();
-        //     });
+            this.runNextMethod();
+            return this;
+        }
 
-        //     this.runNextMethod();
-        //     return this;
-        // }
+        newLine() {
+            this.methodQ.push(() => {
+                this.el.innerHTML += '<br/>';
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            });
 
-        // setSpeed(speed) {
-        //     this.methodQ.push(() => {
-        //         this.speed = Math.floor(Math.abs(speed));
-        //         this.methodQ.isRunning = false;
-        //         this.runNextMethod();
-        //     });
+            this.runNextMethod();
+            return this;
+        }
 
-        //     this.runNextMethod();
-        //     return this;
-        // }
+        callBack(cb, args) {
+            this.methodQ.push(() => {
+                if (args)
+                    cb(...args);
+                else
+                    cb();
+
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            });
+
+            this.runNextMethod();
+            return this;
+        }
+
+        setSpeed(speed) {
+            this.methodQ.push(() => {
+                this.speed = Math.floor(Math.abs(speed));
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            });
+
+            this.runNextMethod();
+            return this;
+        }
     }
 
     return TypeWriter;

@@ -27,7 +27,12 @@
     <script type="text/javascript">
         const tw = new TypeWriter('#target');
 
-        tw.write('The quick brown fox jumps over the lazy dog. ').writeWords('The quick brown fox jumps over the lazy dog.');
+        function setBodyBG(color, text) {
+            document.querySelector('body').style.backgroundColor = color;
+            console.log(text);
+        }
+
+        tw.write('The quick brown fox jumps over the lazy dog. ').writeWords('The quick brown fox jumps over the lazy dog.').writeAll(' the quick brown fox jumps over the lazy dog.').wait(3000).write('the quick brown fox jumps over the lazy dog').newLine().write('the quick brown fox jumps over the lazy dog').setSpeed(25).write('the quick brown fox jumps over the lazy dog').callBack(setBodyBG, ['pink', 'hello world']);
 
     </script>
 </body>
