@@ -14,6 +14,7 @@
                 <p>Normal</p>
                 <p>Link... Wake up Link. Can Hyrule's destiny really depend on such a lazy boy?</p>
             </div>
+            Lorem ipsum dolor sit amet.
         </div>
         <div class="unit-half">
             <div class="rpg-box">
@@ -26,22 +27,7 @@
     <script type="text/javascript">
         const tw = new TypeWriter('#target');
 
-        function bgColor(color, text) {
-            document.querySelector('body').style.backgroundColor = color;
-
-            console.log(text);
-        }
-
-        function resetBGColor() {
-            document.querySelector('body').style.backgroundColor = 'black';
-        }
-
-        tw
-        .write('the quick brown fox jumps over the lazy dog ', {class: 'timid'})
-        .writeWords('the quick brown fox jumps over the lazy dog')
-        .writeAll(' the quick brown fox jumps over the lazy dog', { class: 'timid'})
-        .wait(1000)
-        .eraseWords(10).write(' lazy dog');
+        tw.write(' ').write(' Lorem ipsum dolor sit amet.');
 
     </script>
 </body>
