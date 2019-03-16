@@ -174,10 +174,9 @@ const TypeWriter = (function() {
                                 this.el.lastChild.textContent = this.el.lastChild.textContent.trimEnd();
                             }
 
-                            const words = this.el.lastChild.textContent.split(' ');
-                            const lastWord = words[words.length - 1];
-
                             if (this.el.lastChild.textContent) {
+                                const words = this.el.lastChild.textContent.split(' ');
+                                const lastWord = words[words.length - 1];
                                 this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -lastWord.length);
                                 amount--;
                             }
