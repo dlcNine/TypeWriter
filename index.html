@@ -32,7 +32,8 @@
             console.log(text);
         }
 
-        tw.write('The quick brown fox jumps over the lazy dog. ').writeWords('The quick brown fox jumps over the lazy dog.').writeAll(' the quick brown fox jumps over the lazy dog.').wait(3000).write('the quick brown fox jumps over the lazy dog').newLine().write('the quick brown fox jumps over the lazy dog').setSpeed(25).write('the quick brown fox jumps over the lazy dog').callBack(setBodyBG, ['pink', 'hello world']);
+        tw.write('the quick brown fox jumps over the lazy dog.').write('lazy dog', {class: 'timid'}).erase(100, 25);
+
 
     </script>
 </body>

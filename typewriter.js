@@ -29,7 +29,7 @@ const TypeWriter = (function() {
     class TypeWriter {
         constructor(target) {
             this.el = document.querySelector(target);
-            this.speed = 50; // ms
+            this.speed = 300; // ms
             this.charQ = new Queue();
             this.intervalId = undefined;
             this.methodQ = new Queue();
@@ -116,48 +116,44 @@ const TypeWriter = (function() {
             return this;
         }
 
-        
+        erase(amount, speed) {
+            this.methodQ.push(() => {
+                amount = Math.floor(Math.abs(amount));
 
-        // erase(amount, options = {}) {
-        //     this.methodQ.push(() => {
-        //         amount = Math.floor(Math.abs(amount));
+                if (speed) {
+                    speed = Math.floor(Math.abs(speed));
+                }
 
-        //         if (options.spaces === undefined)
-        //             options.spaces = true;
+                this.intervalId = setInterval(() => {
+                    if (this.el.lastChild && amount) {
+                        if (!this.el.lastChild.textContent.length) {
+                            this.el.lastChild.remove();
+                        }
 
-        //         if (options.speed)
-        //             options.speed = Math.floor(Math.abs(options.speed));
+                        if (this.el.lastChild) {
+                            if (this.el.lastChild.textContent.length) {
+                                this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
+                                amount--;
+                            }
 
-        //         this.intervalId = setInterval(() => {
-        //             if (this.el.lastChild && amount) {
-        //                 if (!this.el.lastChild.textContent.length) {
-        //                     this.el.lastChild.remove();
-        //                 }
+                            if (amount && this.el.lastChild.textContent.length && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
+                                this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
+                                amount--;
+                            }
+                        }
+                    }
+                    else {
+                        clearInterval(this.intervalId);
+                        this.intervalId = undefined;
+                        this.methodQ.isRunning = false;
+                        this.runNextMethod();
+                    }
+                }, speed || this.speed);
+            });
 
-        //                 if (this.el.lastChild) {
-        //                     if (this.el.lastChild.textContent.length) {
-        //                         this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
-        //                         amount--;
-        //                     }
-
-        //                     if (options.spaces && amount && this.el.lastChild.textContent.length && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
-        //                         this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
-        //                         amount--;
-        //                     }
-        //                 }
-        //             }
-        //             else {
-        //                 clearInterval(this.intervalId);
-        //                 this.intervalId = undefined;
-        //                 this.methodQ.isRunning = false;
-        //                 this.runNextMethod();
-        //             }
-        //         }, options.speed || this.speed);
-        //     });
-
-        //     this.runNextMethod();
-        //     return this;
-        // }
+            this.runNextMethod();
+            return this;
+        }
 
         // eraseWords(amount, speed) {
         //     this.methodQ.push(() => {
@@ -198,16 +194,16 @@ const TypeWriter = (function() {
         //     return this;
         // }
 
-        // eraseAll() {
-        //     this.methodQ.push(() => {
-        //         this.el.innerHTML = '';
-        //         this.methodQ.isRunning = false;
-        //         this.runNextMethod();
-        //     });
+        eraseAll() {
+            this.methodQ.push(() => {
+                this.el.innerHTML = '';
+                this.methodQ.isRunning = false;
+                this.runNextMethod();
+            });
 
-        //     this.runNextMethod();
-        //     return this;
-        // }
+            this.runNextMethod();
+            return this;
+        }
 
         wait(milliseconds) {
             this.methodQ.push(() => {
