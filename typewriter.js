@@ -86,24 +86,23 @@ const TypeWriter = (function() {
             return this;
         }
 
-        // writeWords(text, options) {
-        //     if (String(text)) {
-        //         this.methodQ.push(() => {
-        //             const words = String(text).split(' ').map((current, index, array) => {
-        //                 if (index === array.length - 1)
-        //                     return current;
-        //                 else
-        //                     return `${current} `;
-        //             });
+        writeWords(text, options) {
+            if (String(text)) {
+                this.methodQ.push(() => {
+                    let words = String(text).split(' ');
 
-        //             this.charQ.pushSpread(...words);
-        //             this.runCharQ(options);
-        //         });
-        //     }
+                    for (let index = 0; index < words.length - 1; index++) {
+                        words[index] = `${words[index]} `;
+                    }
 
-        //     this.runNextMethod();
-        //     return this;
-        // }
+                    this.charQ.pushSpread(...words);
+                    this.runCharQ(options);
+                });
+            }
+
+            this.runNextMethod();
+            return this;
+        }
 
         // writeAll(text, options) {
         //     if (String(text)) {
