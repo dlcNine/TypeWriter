@@ -29,7 +29,7 @@ const TypeWriter = (function() {
     class TypeWriter {
         constructor(target) {
             this.el = document.querySelector(target);
-            this.speed = 300; // ms
+            this.speed = 50; // ms
             this.charQ = new Queue();
             this.intervalId = undefined;
             this.methodQ = new Queue();
@@ -126,17 +126,17 @@ const TypeWriter = (function() {
 
                 this.intervalId = setInterval(() => {
                     if (this.el.lastChild && amount) {
-                        if (!this.el.lastChild.textContent.length) {
+                        if (!this.el.lastChild.textContent) {
                             this.el.lastChild.remove();
                         }
 
                         if (this.el.lastChild) {
-                            if (this.el.lastChild.textContent.length) {
+                            if (this.el.lastChild.textContent) {
                                 this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
                                 amount--;
                             }
 
-                            if (amount && this.el.lastChild.textContent.length && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
+                            if (amount && this.el.lastChild.textContent && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
                                 this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
                                 amount--;
                             }
@@ -155,44 +155,50 @@ const TypeWriter = (function() {
             return this;
         }
 
-        // eraseWords(amount, speed) {
-        //     this.methodQ.push(() => {
-        //         amount = Math.floor(Math.abs(amount));
-        //         speed = Math.floor(Math.abs(speed));
+        eraseWords(amount, speed) {
+            this.methodQ.push(() => {
+                amount = Math.floor(Math.abs(amount));
 
-        //         this.intervalId = setInterval(() => {
-        //             if (this.el.lastChild && amount) {
-        //                 if (this.el.lastChild.textContent && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
-        //                     this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
-        //                 }
+                if (speed) {
+                    speed = Math.floor(Math.abs(speed));
+                }
 
-        //                 const words = this.el.lastChild.textContent.split(' ');
-        //                 const lastWord = words[words.length - 1];
+                this.intervalId = setInterval(() => {
+                    if (this.el.lastChild && amount) {
+                        if (!this.el.lastChild.textContent) {
+                            this.el.lastChild.remove();
+                        }
 
-        //                 this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -lastWord.length);
+                        if (this.el.lastChild) {
+                            if (this.el.lastChild.textContent) {
+                                this.el.lastChild.textContent = this.el.lastChild.textContent.trimEnd();
+                            }
 
-        //                 if (this.el.lastChild.textContent && this.el.lastChild.textContent[this.el.lastChild.textContent.length - 1] === ' ') {
-        //                     this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -1);
-        //                 }
+                            const words = this.el.lastChild.textContent.split(' ');
+                            const lastWord = words[words.length - 1];
 
-        //                 if (!this.el.lastChild.textContent) {
-        //                     this.el.lastChild.remove();
-        //                 }
+                            if (this.el.lastChild.textContent) {
+                                this.el.lastChild.textContent = this.el.lastChild.textContent.slice(0, -lastWord.length);
+                                amount--;
+                            }
 
-        //                 amount--;
-        //             }
-        //             else {
-        //                 clearInterval(this.intervalId);
-        //                 this.intervalId = undefined;
-        //                 this.methodQ.isRunning = false;
-        //                 this.runNextMethod();
-        //             }
-        //         }, speed || this.speed);
-        //     });
+                            if (this.el.lastChild.textContent) {
+                                this.el.lastChild.textContent = this.el.lastChild.textContent.trimEnd();
+                            }
+                        }
+                    }
+                    else {
+                        clearInterval(this.intervalId);
+                        this.intervalId = undefined;
+                        this.methodQ.isRunning = false;
+                        this.runNextMethod();
+                    }
+                }, speed || this.speed);
+            });
 
-        //     this.runNextMethod();
-        //     return this;
-        // }
+            this.runNextMethod();
+            return this;
+        }
 
         eraseAll() {
             this.methodQ.push(() => {
