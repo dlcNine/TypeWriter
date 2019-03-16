@@ -1,0 +1,33 @@
+{
+  "name": "typewriter",
+  "version": "1.0.0",
+  "description": "Small js library to expressively render text.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx babel src/typewriter.js -o dist/typewriter-min.js --presets=@babel/preset-env,minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlcNine/TypeWriter.git"
+  },
+  "keywords": [
+    "typewriter",
+    "expressive",
+    "text",
+    "js"
+  ],
+  "author": "dlcnine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dlcNine/TypeWriter/issues"
+  },
+  "homepage": "https://github.com/dlcNine/TypeWriter#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.4",
+    "babel-preset-minify": "^0.5.0"
+  }
+}
