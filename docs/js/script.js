@@ -78,6 +78,19 @@ document.querySelector('#triggerSetSpeedExample').addEventListener('click', func
     }
 });
 
+function bodyColors(backgroundColor, color) {
+    const body = document.querySelector('body');
+    body.style.backgroundColor = backgroundColor;
+    body.style.color = color;
+}
+
+const callBackExample = new TypeWriter('#callBackExample');
+
+document.querySelector('#triggerCallBackExample').addEventListener('click', function(){
+    if (!callBackExample.methodQ.isRunning) {
+        callBackExample.eraseAll().write('How about a change of scenery?').wait(500).callBack(bodyColors, ['black', 'whitesmoke']).wait(500).write('...', {speed: 500}).write(' Okay, maybe not.').wait(500).callBack(bodyColors, ['rgb(250, 250, 250)', 'rgba(0, 0, 0, 0.8)']);
+    }
+});
 
 
 
