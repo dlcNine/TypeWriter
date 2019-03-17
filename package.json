@@ -2,7 +2,7 @@
   "name": "typewriter",
   "version": "1.0.0",
   "description": "Small js library to expressively render text.",
-  "main": "index.js",
+  "main": "dist/typewriter-min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx babel src/typewriter.js -o dist/typewriter-min.js --presets=@babel/preset-env,minify"
@@ -28,6 +28,8 @@
     "@babel/core": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.4",
-    "babel-preset-minify": "^0.5.0"
-  }
+    "babel-preset-minify": "^0.5.0",
+    "sandbox-css": "^0.3.4"
+  },
+  "dependencies": {}
 }
