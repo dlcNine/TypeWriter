@@ -27,9 +27,9 @@ const TypeWriter = (function() {
     }
 
     class TypeWriter {
-        constructor(target) {
-            this.el = document.querySelector(target);
-            this.speed = 50; // ms
+        constructor(target, speed) {
+            this.el = document.querySelector(String(target));
+            this.speed = Math.floor(Math.abs(speed)) || 50; // ms
             this.charQ = new Queue();
             this.intervalId = undefined;
             this.methodQ = new Queue();
