@@ -54,6 +54,31 @@ document.querySelector('#triggerEraseAllExample').addEventListener('click', func
     }
 });
 
+const waitExample = new TypeWriter('#waitExample');
+
+document.querySelector('#triggerWaitExample').addEventListener('click', function(){
+    if (!waitExample.methodQ.isRunning) {
+        waitExample.eraseAll().write('The quick brown fox ').wait(1000).write('jumps over the lazy dog.');
+    }
+});
+
+const newLineExample = new TypeWriter('#newLineExample');
+
+document.querySelector('#triggerNewLineExample').addEventListener('click', function(){
+    if (!newLineExample.methodQ.isRunning) {
+        newLineExample.eraseAll().write('The quick brown fox ').newLine().write('jumps over the lazy dog.');
+    }
+});
+
+const setSpeedExample = new TypeWriter('#setSpeedExample');
+
+document.querySelector('#triggerSetSpeedExample').addEventListener('click', function(){
+    if (!setSpeedExample.methodQ.isRunning) {
+        setSpeedExample.eraseAll().write('The quick brown fox ').setSpeed(200).write('jumps over the lazy dog.').setSpeed(50);
+    }
+});
+
+
 
 
 

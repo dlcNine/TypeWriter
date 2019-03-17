@@ -105,6 +105,36 @@ eraseWordsExample.eraseAll().wait(500).write('The quick brown').write(' fox jump
 eraseAllExample.write(' The quick brown fox jumps over the lazy dog.').wait(500).eraseAll();</code></pre>
         </div>
         <hr class="my-3">
+        <div>
+            <h3>.wait(milliseconds)<span class="h4 snippet ml-2">number</span></h3>
+            <p>Waits n milliseconds before exeucting the next method.</p>
+            <button id="triggerWaitExample" class="button dark">View Example</button>
+            <p>&nbsp;<span id="waitExample"></span></p>
+            <pre class="code"><code>const waitExample = new TypeWriter('#waitExample');
+
+waitExample.eraseAll().write('The quick brown fox ').wait(1000).write('jumps over the lazy dog.');</code></pre>
+        </div>
+        <hr class="my-3">
+        <div>
+            <h3>.newLine()</h3>
+            <p>Starts a new line.</p>
+            <button id="triggerNewLineExample" class="button dark">View Example</button>
+            <p>&nbsp;<span id="newLineExample"></span></p>
+            <pre class="code"><code>const newLineExample = new TypeWriter('#newLineExample');
+
+newLineExample.eraseAll().write('The quick brown fox ').newLine().write('jumps over the lazy dog.');</code></pre>
+        </div>
+        <hr class="my-3">
+        <div>
+            <h3>.setSpeed(speed)<span class="h4 snippet ml-2">number</span></h3>
+            <p>Set the default speed (in milliseconds).</p>
+            <button id="triggerSetSpeedExample" class="button dark">View Example</button>
+            <p>&nbsp;<span id="setSpeedExample"></span></p>
+            <pre class="code"><code>const setSpeedExample = new TypeWriter('#setSpeedExample');
+
+setSpeedExample.eraseAll().write('The quick brown fox ').setSpeed(200).write('jumps over the lazy dog.').setSpeed(50);</code></pre>
+        </div>
+        <hr class="my-3">
 
 
 
