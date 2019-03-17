@@ -20,37 +20,91 @@
             <h2>Usage</h2>
             <pre class="code"><code>const tw = new TypeWriter('#target');
 
-tw.write('the quick brown fox').wait(500).newLine()
+tw.write('The quick brown fox').wait(500).newLine()
 .writeWords(' jumped over the').wait(500).writeAll(' lazy dog.').wait(500).eraseAll();
 </code></pre>
             <h2>API</h2>
             <div>
-                <h3>.write(text, options)</h3>
-                <p>Renders the text one character at a time. The optional options object may set properties for <span class="snippet">speed</span> or <span class="snippet">class</span>.</p>
+                <h3>.write(text, options)<span class="h4 snippet ml-2">string, object(optional)</span></h3>
+                <p>Renders the text one character at a time. The options object may set properties for <span class="snippet">speed</span> and <span class="snippet">class</span>. To use more than one class, sepearate each sequential class name with a space.</p>
                 <button id="triggerWriteExample" class="button dark">View Example</button>
                 <p>&nbsp;<span id="writeExample"></span></p>
                 <pre class="code">const writeExample = new TypeWriter('#writeExample');
 
 // no options
-writeExample.eraseAll().write('the quick brown fox jumps over the lazy dog.');
+writeExample.eraseAll().write('The quick brown fox jumps over the lazy dog.');
 
-// with options
-writeExample.eraseAll().write('the quick brown fox jumps over the lazy dog.', {speed: 150, class: 'text-underline'});
+// options
+writeExample.eraseAll().write('The quick brown fox jumps over the lazy dog.', {speed: 150, class: 'text-underline'});
 <code></code></pre>
             </div>
+            <hr class="my-3">
             <div>
-                <h3>.writeWords(text, options)</h3>
-                <p>Renders the text word by word. Internally words are split on single spaces, <span class="snippet">' '</span>. The optional options object may set properties for <span class="snippet">speed</span> or <span class="snippet">class</span>.</p>
+                <h3>.writeWords(text, options)<span class="h4 snippet ml-2">string, object(optional)</span></h3>
+                <p>Renders the text word by word. Internally words are split on single spaces, <span class="snippet">' '</span>. The options object may set properties for <span class="snippet">speed</span> and <span class="snippet">class</span>. To use more than one class, sepearate each sequential class name with a space.</p>
                 <button id="triggerWriteWordsExample" class="button dark">View Example</button>
                 <p>&nbsp;<span id="writeWordsExample"></span></p>
                 <pre class="code"><code>const writeWordsExample = new TypeWriter('#writeWordsExample');
 
 // no options
-writeWordsExample.eraseAll().writeWords('the quick brown fox jumps over the lazy dog.');
+writeWordsExample.eraseAll().writeWords('The quick brown fox jumps over the lazy dog.');
 
-// with options
-writeWordsExample.eraseAll().writeWords('the quick brown fox jumps over the lazy dog.', {speed: 300, class: 'text-underline'});</code></pre>
+// options
+writeWordsExample.eraseAll().writeWords('The quick brown fox jumps over the lazy dog.', {speed: 300, class: 'text-underline'});</code></pre>
             </div>
+            <hr class="my-3">
+            <div>
+                <h3>.writeAll(text, options)<span class="h4 snippet ml-2">string, object(optional)</span></h3>
+                <p>Renders the entire text at once. The options object may set properties for <span class="snippet">speed</span> and <span class="snippet">class</span>. To use more than one class, sepearate each sequential class name with a space.</p>
+                <button id="triggerWriteAllExample" class="button dark">View Example</button>
+                <p>&nbsp;<span id="writeAllExample"></span></p>
+                <pre class="code"><code>const writeAllExample = new TypeWriter('#writeAllExample');
+
+// no options
+writeAllExample.eraseAll().writeAll('The quick brown fox jumps over the lazy dog.').wait(1000);
+
+// options
+writeAllExample.eraseAll().writeAll('The quick brown fox jumps over the lazy dog.', {speed: 300, class: 'text-underline'});</code></pre>
+            </div>
+            <hr class="my-3">
+            <div>
+                <h3>.erase(amount, speed)<span class="h4 snippet ml-2">number, number(optional)</span></h3>
+                <p>Removes the specified amount of characters from the target element. Erasing stops when there are no charcters left, or the amount has reached zero.</p>
+                <button id="triggerEraseExample" class="button dark">View Example</button>
+                <p>&nbsp;<span id="eraseExample"></span></p>
+                <pre class="code"><code>const eraseExample = new TypeWriter('#eraseExample');
+
+// default speed
+eraseExample.eraseAll().write('The quick brown').write(' fox jumps over', {class: 'text-underline'}).write(' the lazy dog.').erase(35).wait(1000);
+
+// optional speed
+eraseExample.eraseAll().wait(500).write('The quick brown').write(' fox jumps over', {class: 'text-underline'}).write(' the lazy dog.').erase(35, 150);</code></pre>
+            </div>
+            <hr class="my-3">
+            <div>
+                <h3>.eraseWords(amount, speed)<span class="h4 snippet ml-2">number, number(optional)</span></h3>
+                <p>Removes the specified amount of words from the target element. Before and after each word is removed, the end whitespace is trimmed.</p>
+                <button id="triggerEraseWordsExample" class="button dark">View Example</button>
+                <p>&nbsp;<span id="eraseWordsExample"></span></p>
+                <pre class="code"><code>const eraseWordsExample = new TypeWriter('#eraseWordsExample');
+
+// default speed
+eraseWordsExample.eraseAll().write('The quick brown').write(' fox jumps over', {class: 'text-underline'}).write(' the lazy dog.').eraseWords(7).wait(500);
+
+// optional speed
+eraseWordsExample.eraseAll().wait(500).write('The quick brown').write(' fox jumps over', {class: 'text-underline'}).write(' the lazy dog.').eraseWords(7, 500);</code></pre>
+            </div>
+            <hr class="my-3">
+            <div>
+            <h3>.eraseAll()</h3>
+            <p>Removes all content from the target element.</p>
+            <button id="triggerEraseAllExample" class="button dark">View Example</button>
+            <p>&nbsp;<span id="eraseAllExample"></span></p>
+            <pre class="code"><code>const eraseAllExample = new TypeWriter('#eraseAllExample');
+
+eraseAllExample.write(' The quick brown fox jumps over the lazy dog.').wait(500).eraseAll();</code></pre>
+        </div>
+        <hr class="my-3">
 
 
 
