@@ -1,5 +1,5 @@
 # TypeWriter
-Small js library to expressively render text.
+Small js library to expressively render text. [Check out the docs](https://dlcnine.github.io/TypeWriter/)
 
 ## Usage
 ```
