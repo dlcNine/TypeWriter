@@ -27,6 +27,16 @@ tw.write('The quick brown fox').wait(500).newLine()
 </code></pre>
             <h2>API</h2>
             <div>
+                <h3>new TypeWriter(cssSelector, speed)<span class="h4 snippet ml-2">string, number(optional)</span></h3>
+                <p>TypeWriter sets a default speed of <span class="snippet">50</span>, if the <span class="snippet">speed</span> argument is not provided.</p>
+                <pre class="prettyprint code">const tw = new TypeWriter('#target');
+
+// or
+
+const twCustomSpeed = new TypeWriter('#target2', 100);<code></code></pre>
+            </div>
+            <hr class="my-3">
+            <div>
                 <h3>.write(text, options)<span class="h4 snippet ml-2">string, object(optional)</span></h3>
                 <p>Renders the text one character at a time. The options object may set properties for <span class="snippet">speed</span> and <span class="snippet">class</span>. To use more than one class, sepearate each sequential class name with a space.</p>
                 <button id="triggerWriteExample" class="button dark">View Example</button>
@@ -139,7 +149,7 @@ setSpeedExample.eraseAll().write('The quick brown fox ').setSpeed(200).write('ju
         <hr class="my-3">
         <div>
             <h3>.callBack(cb, args)<span class="h4 snippet ml-2">function, array(optional)</span></h3>
-            <p>Pass in your own function definition to be executed. The args argument is an optional array of arguments to be spread and passed to your callback function.</p>
+            <p>Pass in your own function definition to be executed. The <span class="snippet">args</span> argument is an optional array of arguments to be spread and passed to your callback function.</p>
             <button id="triggerCallBackExample" class="button dark">View Example</button>
 
             <p>&nbsp;<span id="callBackExample"></span></p>
