@@ -38,6 +38,23 @@ writeExample.eraseAll().write('the quick brown fox jumps over the lazy dog.');
 writeExample.eraseAll().write('the quick brown fox jumps over the lazy dog.', {speed: 150, class: 'text-underline'});
 <code></code></pre>
             </div>
+            <div>
+                <h3>.writeWords(text, options)</h3>
+                <p>Renders the text word by word. Internally words are split on single spaces, <span class="snippet">' '</span>. The optional options object may set properties for <span class="snippet">speed</span> or <span class="snippet">class</span>.</p>
+                <button id="triggerWriteWordsExample" class="button dark">View Example</button>
+                <p>&nbsp;<span id="writeWordsExample"></span></p>
+                <pre class="code"><code>const writeWordsExample = new TypeWriter('#writeWordsExample');
+
+// no options
+writeWordsExample.eraseAll().writeWords('the quick brown fox jumps over the lazy dog.');
+
+// with options
+writeWordsExample.eraseAll().writeWords('the quick brown fox jumps over the lazy dog.', {speed: 300, class: 'text-underline'});</code></pre>
+            </div>
+
+
+
+
         </div>
     </div>
     <script src="./dist/typewriter-min.js" type="text/javascript"></script>
