@@ -1,0 +1,66 @@
+.pln {
+  color: #464648;
+}
+
+.str {
+  color: #004d88;
+}
+
+.kwd {
+  color: #2d28d7;
+}
+
+.com {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.typ {
+  color: #79059c;
+}
+
+.lit {
+  color: #8a0164
+}
+
+.clo,.opn,.pun {
+  color: #000;
+}
+
+.tag {
+  color: #008
+}
+
+.atn {
+  color: #900047;
+}
+
+.atv {
+  color: #004d88;
+}
+
+.dec,.var {
+  color: #606
+}
+
+.fun {
+  color: red
+}
+
+pre.prettyprint {
+  font-size: 1.6rem;
+  padding: 1.25em;
+  border: none;
+}
+
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0
+}
+
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 {
+  list-style-type: none
+}
+
+li.L1,li.L3,li.L5,li.L7,li.L9 {
+  /*background: none;*/
+}
