@@ -2,10 +2,10 @@
   "name": "typewriter",
   "version": "1.0.0",
   "description": "Small js library to expressively render text.",
-  "main": "dist/typewriter-min.js",
+  "main": "dist/typewriter.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx babel src/typewriter.js -o dist/typewriter-min.js --presets=@babel/preset-env,minify"
+    "build": "npx babel src/typewriter.js -o dist/typewriter.min.js --presets=@babel/preset-env,minify"
   },
   "repository": {
     "type": "git",
