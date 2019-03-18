@@ -15,4 +15,4 @@ tw.write('the quick brown ').newLine()
 ```
 
 ## Docs
-Check out the [TypeWriter documentation page](https://dlcnine.github.io/TypeWriter/) for deatils on its API.
+Check out the [TypeWriter documentation page](https://dlcnine.github.io/TypeWriter/) for details on its API.
