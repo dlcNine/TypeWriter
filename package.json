@@ -1,7 +1,7 @@
 {
   "name": "typewriter",
   "version": "1.0.0",
-  "description": "Small js library to expressively render text.",
+  "description": "A small js library to expressively render text.",
   "main": "dist/typewriter.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

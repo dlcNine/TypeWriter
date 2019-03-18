@@ -1,7 +1,7 @@
 # TypeWriter
 A small JS library to expressively render text.
 
-##Installation
+## Installation
 ```
 <script src="https://cdn.jsdelivr.net/gh/dlcnine/TypeWriter@1.0.0/dist/typewriter.min.js"></script>
 ```
